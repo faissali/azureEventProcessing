@@ -46,9 +46,22 @@ stages:
         archiveType: zip
         archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
         replaceExistingArchive: true
-
-    - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+    
+    - publish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
       artifact: drop
+
+    - task: CopyFiles@2
+      displayName: 'Copy Terraform files'
+      inputs:
+        SourceFolder: 'Deploy'
+        Contents: '**'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)/Deploy'
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
 
 - stage: Deploy
   displayName: Deploy stage
