@@ -9,6 +9,13 @@
 
 terraform {
   required_version = "= 1.3.5"
+  backend "azurerm" {
+    resource_group_name  = "fbu-apps"         # mettre ici le nom du resource group de vos ressource
+    storage_account_name = "terraformstoragefbu"      # mettre le nom du compte de stockage créer dans le lab 1
+    container_name       = "terraform"
+    key                  = "terraform-__environment__.tfstate"
+    access_key           = "__tf_storage_account_key__"
+  }
   required_providers {
     azurerm = {
       # The "hashicorp" namespace is the new home for the HashiCorp-maintained
