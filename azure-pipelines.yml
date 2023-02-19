@@ -81,9 +81,9 @@ stages:
 
   jobs:
   - job: TerraformInstall
+    displayName: Deploy resources
     steps:
     - task: AzureCLI@2
-      displayName: Install Terraform Backend
       inputs:
         azureSubscription: 'Free Trial (14451a32-9abf-47f3-ab11-e00284963712)'
         scriptType: 'bash'
@@ -93,7 +93,6 @@ stages:
           az storage account create --name "$(terraformStorageName)" --resource-group "$(resourceGroupName)" --location "$(location)" --sku "Standard_LRS"          
           az storage container create --name "$(terraformContainerName)" --account-name "$(terraformStorageName)"
     - task: TerraformInstaller@1
-      displayName: Install Terraform
       inputs:
         terraformVersion: 'latest'
 
