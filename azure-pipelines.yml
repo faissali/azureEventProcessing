@@ -13,11 +13,11 @@ variables:
   # Function app name
   functionAppName: 'fbu-function-processing'
 
-  # terraform storage name
-  terraformStorageName: 'fbu-apps'
-
   # resource group name
-  resourceGroupName: 'terraformstoragefbu'
+  resourceGroupName: 'fbu-apps'
+
+  # terraform storage name
+  terraformStorageName: 'terraformstoragefbu'
 
    # terraform container name
   terraformContainerName : 'terraform'
