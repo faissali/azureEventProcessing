@@ -66,20 +66,20 @@ stages:
 
   jobs:
   - deployment: Deploy
-    displayName: Deploy resources
+    displayName: Deploy terraform backend
     environment: 'development'
     pool:
       vmImage: $(vmImageName)
-
-    strategy:
-      runOnce:
-        deploy:
-
-          steps:
-          - task: AzureFunctionApp@1
-            displayName: 'Azure functions app deploy'
-            inputs:
-              azureSubscription: '$(azureSubscription)'
-              appType: functionApp
-              appName: $(functionAppName)
-              package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
+    steps:   
+    - task: TerraformTaskV4@4
+        inputs:
+          provider: 'azurerm'
+          command: 'init'
+          backendServiceArm: 'Free Trial (14451a32-9abf-47f3-ab11-e00284963712)'
+          backendAzureRmResourceGroupName: 'fbu-apps'
+          backendAzureRmStorageAccountName: 'terraformstoragefbu'
+          backendAzureRmContainerName: 'terraform'
+          backendAzureRmKey: 'terraform.tfstate'
+      
+    
+          
