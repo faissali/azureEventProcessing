@@ -25,7 +25,7 @@ stages:
 
   jobs:
   - job: Build
-    displayName: Build
+    displayName: Build & Publish
     pool:
       vmImage: $(vmImageName)
 
@@ -60,12 +60,12 @@ stages:
 
 
 - stage: Deploy
-  displayName: Deploy stage
+  displayName: Deploy Dev
   dependsOn: Build
   condition: succeeded()
 
   jobs:
-  - deployment: Deploy
+  - deployment: Deploy resources
     displayName: Deploy
     environment: 'development'
     pool:
