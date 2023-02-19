@@ -13,8 +13,23 @@ variables:
   # Function app name
   functionAppName: 'fbu-function-processing'
 
+  # terraform storage name
+  terraformStorageName: 'fbu-apps'
+
+  # resource group name
+  resourceGroupName: 'terraformstoragefbu'
+
+   # terraform container name
+  terraformContainerName : 'terraform'
+
+  # terraform key
+  terraformKey : 'terraform.tfstate'
+
   # Agent VM image name
   vmImageName: 'windows-2019'
+  
+  # location
+  location: 'westeurope'
 
   # Working Directory
   workingDirectory: '$(System.DefaultWorkingDirectory)/'
@@ -68,6 +83,17 @@ stages:
   - job: TerraformInstall
     displayName: Install Terraform
     steps:
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'Free Trial (14451a32-9abf-47f3-ab11-e00284963712)'
+        scriptType: 'ps'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          call az group create --location $(location) --name "$(resourceGroupName)"
+          
+          call az storage account create --name "$(terraformStorageName)" --resource-group "$(resourceGroupName)" --location "$(location)" --sku "Standard_LRS"
+          
+          call az storage container create --name "$(terraformContainerName)" --account-name "$(terraformStorageName)"
     - task: TerraformInstaller@1
       inputs:
         terraformVersion: 'latest'
