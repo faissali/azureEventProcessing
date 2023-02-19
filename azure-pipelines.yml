@@ -65,12 +65,6 @@ stages:
   condition: succeeded()
 
   jobs:
-  - deployment: Deploy
-    displayName: Deploy resources
-    environment: 'development'
-    pool:
-      vmImage: $(vmImageName)
-
   - job: TerraformInstall
     displayName: Install Terraform
     steps:
