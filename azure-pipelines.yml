@@ -89,10 +89,8 @@ stages:
         scriptType: 'ps'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          call az group create --location $(location) --name "$(resourceGroupName)"
-          
-          call az storage account create --name "$(terraformStorageName)" --resource-group "$(resourceGroupName)" --location "$(location)" --sku "Standard_LRS"
-          
+          call az group create --location $(location) --name "$(resourceGroupName)"       
+          call az storage account create --name "$(terraformStorageName)" --resource-group "$(resourceGroupName)" --location "$(location)" --sku "Standard_LRS"          
           call az storage container create --name "$(terraformContainerName)" --account-name "$(terraformStorageName)"
     - task: TerraformInstaller@1
       inputs:
