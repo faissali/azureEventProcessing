@@ -4,7 +4,7 @@ terraform {
     resource_group_name  = "fbu-apps"         # mettre ici le nom du resource group de vos ressource
     storage_account_name = "terraformstoragefbu"      # mettre le nom du compte de stockage créer dans le lab 1
     container_name       = "terraform"
-    key                  = "test"
+    key                  = "terraform.tfstate"
     access_key           = "__tf_storage_account_key__"
   }
   required_providers {
