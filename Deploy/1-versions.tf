@@ -5,7 +5,7 @@ terraform {
     storage_account_name = "terraformstoragefbu"      # mettre le nom du compte de stockage créer dans le lab 1
     container_name       = "terraform"
     key                  = "terraform.tfstate"
-    access_key           = "__tf_storage_account_key__"
+    #access_key           = "__tf_storage_account_key__"
   }
   required_providers {
     azurerm = {
