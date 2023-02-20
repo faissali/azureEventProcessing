@@ -100,6 +100,7 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'init'
+        workingDirectory: '$(Build.ArtifactStagingDirectory)/Deploy'
         backendServiceArm: 'Free Trial (14451a32-9abf-47f3-ab11-e00284963712)'
         backendAzureRmResourceGroupName: 'fbu-apps'
         backendAzureRmStorageAccountName: 'terraformstoragefbu'
@@ -110,6 +111,7 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'apply'
+        workingDirectory: '$(Build.ArtifactStagingDirectory)/Deploy'
         commandOptions: '--auto-approve'
         environmentServiceNameAzureRM: 'Free Trial (14451a32-9abf-47f3-ab11-e00284963712)'
     
