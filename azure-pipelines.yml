@@ -104,10 +104,10 @@ stages:
         command: 'init'
         workingDirectory: '$(workingDirectory)/Deploy'
         backendServiceArm: '$(azureServiceConnection)'
-        backendAzureRmResourceGroupName: 'fbu-apps'
-        backendAzureRmStorageAccountName: 'terraformstoragefbu'
-        backendAzureRmContainerName: 'terraform'
-        backendAzureRmKey: 'terraform.tfstate'
+        backendAzureRmResourceGroupName: '$(resourceGroupName)'
+        backendAzureRmStorageAccountName: '$(terraformStorageName)'
+        backendAzureRmContainerName: '$(terraformContainerName)'
+        backendAzureRmKey: '$(terraformKey)'
     - task: TerraformTaskV4@4
       displayName: 'Terraform : Apply --auto-approve'
       inputs:
