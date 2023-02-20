@@ -51,15 +51,15 @@ stages:
         command: 'build'
         projects: |
           $(workingDirectory)/*.csproj
-        arguments: --output $(System.DefaultWorkingDirectory)/publish_output --configuration Release
+        arguments: --output $(workingDirectory)/publish_output --configuration Release
 
     - task: ArchiveFiles@2
       displayName: 'Archive files'
       inputs:
-        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/publish_output'
+        rootFolderOrFile: '$(workingDirectory)/publish_output'
         includeRootFolder: false
         archiveType: zip
-        archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+        archiveFile: $(workingDirectory)/$(Build.BuildId).zip
         replaceExistingArchive: true
 
     - task: CopyFiles@2
@@ -67,9 +67,9 @@ stages:
       inputs:
         SourceFolder: 'Deploy'
         Contents: '**'
-        TargetFolder: '$(Build.ArtifactStagingDirectory)/Deploy'
+        TargetFolder: '$(workingDirectory)/Deploy'
     
-    - publish: '$(Build.ArtifactStagingDirectory)/'
+    - publish: '$(workingDirectory)/'
       artifact: drop
 
 
@@ -102,17 +102,18 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'init'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy'
+        workingDirectory: '$(workingDirectory)/Deploy'
         backendServiceArm: 'Free Trial (14451a32-9abf-47f3-ab11-e00284963712)'
         backendAzureRmResourceGroupName: 'fbu-apps'
         backendAzureRmStorageAccountName: 'terraformstoragefbu'
         backendAzureRmContainerName: 'terraform'
         backendAzureRmKey: 'terraform.tfstate'
     - task: TerraformTaskV4@4
+      displayName: 'Terraform : Apply --auto-approve'
       inputs:
         provider: 'azurerm'
         command: 'apply'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/Deploy'
+        workingDirectory: '$(workingDirectory)/Deploy'
         commandOptions: '--auto-approve'
         environmentServiceNameAzureRM: 'Free Trial (14451a32-9abf-47f3-ab11-e00284963712)'
     
