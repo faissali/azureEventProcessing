@@ -95,8 +95,23 @@ stages:
     - task: TerraformInstaller@1
       inputs:
         terraformVersion: 'latest'
-
     
+    - task: TerraformTaskV4@4
+      inputs:
+        provider: 'azurerm'
+        command: 'init'
+        backendServiceArm: 'Free Trial (14451a32-9abf-47f3-ab11-e00284963712)'
+        backendAzureRmResourceGroupName: 'fbu-apps'
+        backendAzureRmStorageAccountName: 'terraformstoragefbu'
+        backendAzureRmContainerName: 'terraform'
+        backendAzureRmKey: 'terraform.tfstate'
+
+    - task: TerraformTaskV4@4
+      inputs:
+        provider: 'azurerm'
+        command: 'apply'
+        commandOptions: '--auto-approve'
+        environmentServiceNameAzureRM: 'Free Trial (14451a32-9abf-47f3-ab11-e00284963712)'
     
       
     
