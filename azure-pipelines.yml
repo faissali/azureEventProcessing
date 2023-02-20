@@ -8,7 +8,7 @@ trigger:
 
 variables:
   # Azure Resource Manager connection created during pipeline creation
-  azureSubscription: 'e476a89e-0ef6-4546-8634-dbfdb2fe1bbc'
+  azureServiceConnection: 'AzureServiceConnection'
 
   # Function app name
   functionAppName: 'fbu-function-processing'
@@ -85,7 +85,7 @@ stages:
     steps:
     - task: AzureCLI@2
       inputs:
-        azureSubscription: 'AzureServiceConnection'
+        azureSubscription: '$(azureServiceConnection)'
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
@@ -103,7 +103,7 @@ stages:
         provider: 'azurerm'
         command: 'init'
         workingDirectory: '$(workingDirectory)/Deploy'
-        backendServiceArm: 'AzureServiceConnection'
+        backendServiceArm: '$(azureServiceConnection)'
         backendAzureRmResourceGroupName: 'fbu-apps'
         backendAzureRmStorageAccountName: 'terraformstoragefbu'
         backendAzureRmContainerName: 'terraform'
@@ -115,7 +115,7 @@ stages:
         command: 'apply'
         workingDirectory: '$(workingDirectory)/Deploy'
         commandOptions: '--auto-approve'
-        environmentServiceNameAzureRM: 'AzureServiceConnection'
+        environmentServiceNameAzureRM: '$(azureServiceConnection)'
     
     
       
