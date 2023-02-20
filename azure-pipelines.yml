@@ -97,14 +97,12 @@ stages:
       inputs:
         terraformVersion: 'latest'
     
-    - bash: ls $(System.DefaultWorkingDirectory)/_EventProcessing/drop/Deploy
-
     - task: TerraformTaskV4@4
       displayName: 'Terraform : init'
       inputs:
         provider: 'azurerm'
         command: 'init'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/_EventProcessing/drop/Deploy'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/drop/Deploy'
         backendServiceArm: 'Free Trial (14451a32-9abf-47f3-ab11-e00284963712)'
         backendAzureRmResourceGroupName: 'fbu-apps'
         backendAzureRmStorageAccountName: 'terraformstoragefbu'
@@ -114,7 +112,7 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'apply'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/_EventProcessing/drop/Deploy'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/drop/Deploy'
         commandOptions: '--auto-approve'
         backendServiceArm: 'Free Trial (14451a32-9abf-47f3-ab11-e00284963712)'
         backendAzureRmResourceGroupName: 'fbu-apps'
