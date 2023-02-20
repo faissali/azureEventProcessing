@@ -85,7 +85,7 @@ stages:
     steps:
     - task: AzureCLI@2
       inputs:
-        azureSubscription: 'Free Trial (14451a32-9abf-47f3-ab11-e00284963712)'
+        azureSubscription: 'AzureServiceConnection'
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
