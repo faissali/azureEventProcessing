@@ -97,6 +97,8 @@ stages:
       inputs:
         terraformVersion: 'latest'
     
+    - bash: ls $(System.DefaultWorkingDirectory)/_EventProcessing/drop/Deploy
+
     - task: TerraformTaskV4@4
       displayName: 'Terraform : init'
       inputs:
@@ -119,6 +121,7 @@ stages:
         backendAzureRmStorageAccountName: 'terraformstoragefbu'
         backendAzureRmContainerName: 'terraform'
         backendAzureRmKey: 'terraform.tfstate'
+    
     
       
     
