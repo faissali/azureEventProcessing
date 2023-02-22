@@ -14,7 +14,7 @@ variable "resourceGroupName" {
 
 variable "ownerTag" {
   type    = string
-  default = "faycal.bziou@exakis-nelite.com"
+  default = "faycal.bziou@outlook.fr"
 }
 
 #  Storage Account Name
