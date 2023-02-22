@@ -1,0 +1,40 @@
+name: Deploy event processing architecture
+
+on:
+  workflow_dispatch: # manuel https://docs.github.com/en/actions/using-workflows/triggering-a-workflow
+
+env:
+  # set this to the path to your web app project, defaults to the repository root
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: '.'    
+  # Function app name
+  FUNCTION_APP_NAME: fbu-function-processing
+  # resource group name
+  RESOURCE_GROUP_NAME: fbu-apps
+  # terraform storage name
+  TERRAFORM_STORAGE_NAME: terraformstoragefbu
+  # terraform container name
+  TERRAFORM_CONTAINER_NAME: terraform
+  # terraform key
+  TERRAFORM_KEY: terraform.tfstate
+  # location
+  LOCATION: westeurope
+
+jobs:
+  build:
+    runs-on: windows-2019
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '6.0.x'
+
+    - name: 'Resolve Project Dependencies Using Dotnet'
+      shell: pwsh
+      run: |
+        pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
+        dotnet build --configuration Release --output ./output
+        popd
