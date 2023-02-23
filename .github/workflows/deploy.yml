@@ -62,4 +62,4 @@ jobs:
       uses: flcdrg/replace-multiple-action@v1
       with:
         files: './Deploy/*.tf'
-        find: '[{ "find": "Multiple", "replace": "Many" }]'
+        find: '[{ "find": "Multiple", "replaces": "Many" }]'
