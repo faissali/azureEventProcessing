@@ -57,15 +57,12 @@ jobs:
 
     - name: Create storage container for terraform backend
       run: az storage container create --name "${{ env.TERRAFORM_CONTAINER_NAME }}" --account-name "${{ env.TERRAFORM_STORAGE_NAME }}"
-      
+    
     - name: Replace terraform backend configuration
-      uses: datamonsters/replace-action@v2
+      uses: flcdrg/replace-multiple-action@v1
       with:
-        # Files, comma-separated. Supposed PLACEHOLDER in them
-        files: './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/Deploy/1-versions.tf'
-        # Comma-separated pairs PLACEHOLDER=value
-        replacements: '$RESOURCE_GROUP_NAME=${{ env.RESOURCE_GROUP_NAME }}'
-      
+        files: './Deploy/*.tf'
+        find: '[{ "$RESOURCE_GROUP_NAME": "${{ env.RESOURCE_GROUP_NAME }}", "replace": "Many" }]
   
       
       
