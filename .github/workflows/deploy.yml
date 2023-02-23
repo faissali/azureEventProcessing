@@ -52,8 +52,8 @@ jobs:
     - name: Create resource group
       run: az group create --location ${{ env.LOCATION }} --name "${{ env.RESOURCE_GROUP_NAME }}"
 
-    - name: Create storage account
+    - name: Create storage account for terraform backend
       run: az storage account create --name "${{ env.TERRAFORM_STORAGE_NAME }}" --resource-group "${{ env.RESOURCE_GROUP_NAME }}" --location "${{ env.LOCATION }}" --sku "Standard_LRS"
 
-    - name: Create storage container
+    - name: Create storage container for terraform backend
       run: az storage container create --name "${{ env.TERRAFORM_CONTAINER_NAME }}" --account-name "${{ env.TERRAFORM_STORAGE_NAME }}"
