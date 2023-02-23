@@ -73,21 +73,21 @@ jobs:
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: |
-        cd ./Deploy        
+        cd ../Deploy        
         terraform init
     # https://www.terraform.io/cli/commands/validate
     - name: Terraform Validate
       run: |
-        cd ./Deploy
+        cd ../Deploy
         terraform validate
     # Generates an execution plan for Terraform with tfplan file https://www.terraform.io/cli/commands/plan
     - name: Terraform Plan
       run: |
-        cd ./Deploy
+        cd ../Deploy
         terraform plan -lock=false -out=monplan.tfplan
               
     # apply a execution plan https://www.terraform.io/cli/commands/apply      
     - name: Terraform Apply
       run: |
-        cd ./Deploy
+        cd ../Deploy
         terraform apply -auto-approve -lock=false "monplan.tfplan"
