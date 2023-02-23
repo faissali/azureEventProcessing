@@ -63,6 +63,5 @@ jobs:
       with:
         files: './Deploy/*.tf'
         find: '[{ "$RESOURCE_GROUP_NAME": "${{ env.RESOURCE_GROUP_NAME }}", "replace": "Many" }]
-  
       
       
