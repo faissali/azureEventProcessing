@@ -62,4 +62,4 @@ jobs:
       uses: flcdrg/replace-multiple-action@v1
       with:
         files: './Deploy/*.tf'
-        find: '[{ "$RESOURCE_GROUP_NAME": "${{ env.RESOURCE_GROUP_NAME }}", "replace": "Many" }]
+        find: '[{ "find": "Multiple", "replace": "Many" }]'
