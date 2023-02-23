@@ -1,7 +1,7 @@
 terraform {
   required_version = "= 1.3.9"
   backend "azurerm" {
-    resource_group_name  = "fbu-apps"         # mettre ici le nom du resource group de vos ressource
+    resource_group_name  = "$RESOURCE_GROUP_NAME"         # mettre ici le nom du resource group de vos ressource
     storage_account_name = "terraformstoragefbu"      # mettre le nom du compte de stockage créer dans le lab 1
     container_name       = "terraform"
     key                  = "terraform.tfstate"

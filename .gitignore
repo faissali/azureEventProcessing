@@ -263,3 +263,7 @@ paket-files/
 __pycache__/
 *.pyc
 /azure-pipelines.yml
+.vscode/extensions.json
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
