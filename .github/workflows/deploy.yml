@@ -27,12 +27,13 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
       
-    - name: Replace terraform backend configuration
-      uses: flcdrg/replace-multiple-action@v1
+    - name: Find and Replace
+      uses: jacobtomlinson/gha-find-replace@v3
       with:
-        files: './Deploy/1-versions.tf'
-        find: '[{ "test": "xxx", "replace": "Many" }]'
-        #find: '[{ "$RESOURCE_GROUP_NAME": "${{ env.RESOURCE_GROUP_NAME }}", "$TERRAFORM_STORAGE_NAME": "${{ env.TERRAFORM_STORAGE_NAME }}" , "$TERRAFORM_CONTAINER_NAME": "${{ env.TERRAFORM_CONTAINER_NAME }}" , "$TERRAFORM_KEY": "${{ env.TERRAFORM_KEY }}" }]'
+        find: "$RESOURCE_GROUP_NAME"
+        replace: "${{ env.RESOURCE_GROUP_NAME }}"
+        include: "Deploy/1-versions.tf"
+        regex: false
     
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v3
