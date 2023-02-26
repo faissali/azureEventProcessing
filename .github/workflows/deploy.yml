@@ -51,6 +51,9 @@ jobs:
       
     - name: Publish
       run: dotnet publish ./EventProcessingFunction.csproj -c Release -o ./output
+    
+    - name: Test replace
+      run: cat ./Deploy/1-versions.tf
       
     - name: Upload the build artifact
       uses: actions/upload-artifact@v3
