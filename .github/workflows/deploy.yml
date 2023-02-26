@@ -39,14 +39,33 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '6.0.x'
-
-    - name: 'Resolve Project Dependencies Using Dotnet'
-      shell: pwsh
-      run: |
-        pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
-        dotnet build --configuration Release --output ./output
-        popd
-             
+        
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: Build
+      run: dotnet build --no-restore
+      
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+      
+    - name: Publish
+      run: dotnet publish azureEventProcessing/EventProcessingFunction.csproj -c Release -o ./output
+      
+    - name: Upload the build artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: eventFunction
+        path: azureEventProcessing/output/**
+        if-no-files-found: error
+      
+    #- name: 'Resolve Project Dependencies Using Dotnet'
+    #  shell: pwsh
+    #  run: |
+    #    pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
+    #    dotnet build --configuration Release --output ./output
+    #    popd
+    
     - name: Azure login
       uses: azure/login@v1.4.6
       with:
