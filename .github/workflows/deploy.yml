@@ -71,7 +71,7 @@ jobs:
       uses: jacobtomlinson/gha-find-replace@v3
       with:
         find: "$CLIENT_ID"
-        replace: "${{ secrets.$CLIENT_ID }}"
+        replace: "${{ secrets.CLIENT_ID }}"
         include: "Deploy/1-versions.tf"
         regex: false
         
