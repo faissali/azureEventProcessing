@@ -59,7 +59,7 @@ jobs:
     - name: Replace terraform backend configuration
       uses: flcdrg/replace-multiple-action@v1
       with:
-        files: './Deploy/*.tf'
+        files: 'Deploy/*.tf'
         find: '[{ "$RESOURCE_GROUP_NAME": "${{ env.RESOURCE_GROUP_NAME }}", "$TERRAFORM_STORAGE_NAME": "${{ env.TERRAFORM_STORAGE_NAME }}" , "$TERRAFORM_CONTAINER_NAME": "${{ env.TERRAFORM_CONTAINER_NAME }}" , "$TERRAFORM_KEY": "${{ env.TERRAFORM_KEY }}" }]'
     
     # Install the needed version of Terraform cli
