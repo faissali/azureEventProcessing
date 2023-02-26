@@ -19,6 +19,10 @@ terraform {
       # Check Changelog : https://github.com/terraform-providers/terraform-provider-azurerm/blob/master/CHANGELOG.md
       source  = "hashicorp/azurerm"
       version = "= 2.98.0"
+      subscription_id = "$SUBSCRIPTION_ID"
+      client_id       = "$CLIENT_ID"
+      client_secret   = "$CLIENT_SECRET"
+      tenant_id       = "$TENANT_ID"
     }
 
 }
