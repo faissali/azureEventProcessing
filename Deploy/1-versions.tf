@@ -19,10 +19,6 @@ terraform {
       # Check Changelog : https://github.com/terraform-providers/terraform-provider-azurerm/blob/master/CHANGELOG.md
       source  = "hashicorp/azurerm"
       version = "= 2.98.0"
-      subscription_id = "$SUBSCRIPTION_ID"
-      client_id       = "$CLIENT_ID"
-      client_secret   = "$CLIENT_SECRET"
-      tenant_id       = "$TENANT_ID"
     }
 
 }
@@ -30,6 +26,12 @@ terraform {
 
 # Configure the Azure Provider
 provider "azurerm" {
+  # credentials
+  subscription_id = "$SUBSCRIPTION_ID"
+  client_id       = "$CLIENT_ID"
+  client_secret   = "$CLIENT_SECRET"
+  tenant_id       = "$TENANT_ID"
+
   # whilst the `version` attribute is optional, we recommend pinning to a given version of the Provider
   features {}
 }
