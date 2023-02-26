@@ -53,6 +53,9 @@ jobs:
     - name: Create storage container for terraform backend
       run: az storage container create --name "${{ env.TERRAFORM_CONTAINER_NAME }}" --account-name "${{ env.TERRAFORM_STORAGE_NAME }}"
     
+    - name: LS
+      run: ls
+    
     - name: Replace terraform backend configuration
       uses: flcdrg/replace-multiple-action@v1
       with:
