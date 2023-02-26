@@ -59,6 +59,38 @@ jobs:
         include: "Deploy/1-versions.tf"
         regex: false
         
+    - name: Find and Replace SUBSCRIPTION_ID in deploy files
+      uses: jacobtomlinson/gha-find-replace@v3
+      with:
+        find: "$SUBSCRIPTION_ID"
+        replace: "${{ secrets.SUBSCRIPTION_ID }}"
+        include: "Deploy/1-versions.tf"
+        regex: false
+        
+    - name: Find and Replace $CLIENT_ID in deploy files
+      uses: jacobtomlinson/gha-find-replace@v3
+      with:
+        find: "$CLIENT_ID"
+        replace: "${{ secrets.$CLIENT_ID }}"
+        include: "Deploy/1-versions.tf"
+        regex: false
+        
+    - name: Find and Replace CLIENT_SECRET in deploy files
+      uses: jacobtomlinson/gha-find-replace@v3
+      with:
+        find: "$CLIENT_SECRET"
+        replace: "${{ secrets.CLIENT_SECRET }}"
+        include: "Deploy/1-versions.tf"
+        regex: false
+        
+    - name: Find and Replace TENANT_ID in deploy files
+      uses: jacobtomlinson/gha-find-replace@v3
+      with:
+        find: "$TENANT_ID"
+        replace: "${{ secrets.TENANT_ID }}"
+        include: "Deploy/1-versions.tf"
+        regex: false
+        
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v3
       with:
