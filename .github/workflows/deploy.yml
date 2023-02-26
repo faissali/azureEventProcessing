@@ -98,7 +98,7 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: EventProcessingFunction
-        path: EventProcessingFunction
+        path: ./
     
     - name: ls
       run: ls
@@ -128,7 +128,6 @@ jobs:
     
     - name: Terraform Init
       run: terraform init
-      working-directory: ./Deploy
       shell: bash
       
     # https://www.terraform.io/cli/commands/validate
