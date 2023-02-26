@@ -39,11 +39,6 @@ jobs:
         dotnet build --configuration Release --output ./output
         popd
              
-  deploy:
-    needs: build
-    runs-on: windows-latest
-
-    steps:
     - name: Azure login
       uses: azure/login@v1.4.6
       with:
@@ -72,19 +67,22 @@ jobs:
     
     - name: Terraform Init
       run: terraform init
-      working-directory: ../Deploy
+      working-directory: ./Deploy
       shell: bash
       
     # https://www.terraform.io/cli/commands/validate
     - name: Terraform Validate
+      working-directory: ./Deploy
       run: |
         terraform validate
     # Generates an execution plan for Terraform with tfplan file https://www.terraform.io/cli/commands/plan
     - name: Terraform Plan
+      working-directory: ./Deploy
       run: |
         terraform plan -lock=false -out=monplan.tfplan
               
     # apply a execution plan https://www.terraform.io/cli/commands/apply      
     - name: Terraform Apply
+      working-directory: ./Deploy
       run: |
         terraform apply -auto-approve -lock=false "monplan.tfplan"
