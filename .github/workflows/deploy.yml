@@ -82,19 +82,30 @@ jobs:
     - name: Upload the build artifact
       uses: actions/upload-artifact@v3
       with:
-        name: eventFunction
+        name: EventProcessingFunction
         path: |
          ./output/**
          ./Deploy/**
         if-no-files-found: error
-      
-    #- name: 'Resolve Project Dependencies Using Dotnet'
-    #  shell: pwsh
-    #  run: |
-    #    pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
-    #    dotnet build --configuration Release --output ./output
-    #    popd
+        
+  deploy:
+  
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
     
+    - name: Download the build artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: EventProcessingFunction
+        path: EventProcessingFunction
+    
+    - name: ls
+      run: ls
+   
+    - name: pwd
+      run: pwd
+      
     - name: Azure login
       uses: azure/login@v1.4.6
       with:
