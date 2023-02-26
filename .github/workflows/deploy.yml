@@ -26,7 +26,14 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-
+      
+    - name: Replace terraform backend configuration
+      uses: flcdrg/replace-multiple-action@v1
+      with:
+        files: './Deploy/1-versions.tf'
+        find: '[{ "test": "xxx", "replace": "Many" }]'
+        #find: '[{ "$RESOURCE_GROUP_NAME": "${{ env.RESOURCE_GROUP_NAME }}", "$TERRAFORM_STORAGE_NAME": "${{ env.TERRAFORM_STORAGE_NAME }}" , "$TERRAFORM_CONTAINER_NAME": "${{ env.TERRAFORM_CONTAINER_NAME }}" , "$TERRAFORM_KEY": "${{ env.TERRAFORM_KEY }}" }]'
+    
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v3
       with:
@@ -52,17 +59,7 @@ jobs:
 
     - name: Create storage container for terraform backend
       run: az storage container create --name "${{ env.TERRAFORM_CONTAINER_NAME }}" --account-name "${{ env.TERRAFORM_STORAGE_NAME }}"
-    
-    - name: LS
-      run: ls
-    
-    - name: Replace terraform backend configuration
-      uses: flcdrg/replace-multiple-action@v1
-      with:
-        files: './Deploy/1-versions.tf'
-        find: '[{ "test": "xxx", "replace": "Many" }]'
-        #find: '[{ "$RESOURCE_GROUP_NAME": "${{ env.RESOURCE_GROUP_NAME }}", "$TERRAFORM_STORAGE_NAME": "${{ env.TERRAFORM_STORAGE_NAME }}" , "$TERRAFORM_CONTAINER_NAME": "${{ env.TERRAFORM_CONTAINER_NAME }}" , "$TERRAFORM_KEY": "${{ env.TERRAFORM_KEY }}" }]'
-    
+        
     # Install the needed version of Terraform cli
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
