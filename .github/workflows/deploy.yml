@@ -158,6 +158,9 @@ jobs:
       with:
         terraform_version: 1.3.9
     
+    - name: Azure Login
+      run: az login --service-principal -u "${{ secrets.CLIENT_ID }}" -p "${{ secrets.CLIENT_SECRET }}" --tenant ${{ secrets.TENANT_ID }}"
+      
     - name: Terraform Init
       run: terraform init
       working-directory: ./Deploy
