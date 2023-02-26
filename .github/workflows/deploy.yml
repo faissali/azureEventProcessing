@@ -60,7 +60,7 @@ jobs:
       uses: flcdrg/replace-multiple-action@v1
       with:
         files: './Deploy/1-versions.tf'
-        find: '[{ "RESOURCEGROUPNAME": "xxx", "TERRAFORMSTORAGENAME": "Many" }]'
+        find: '[{ "test": "xxx", "replace": "Many" }]'
         #find: '[{ "$RESOURCE_GROUP_NAME": "${{ env.RESOURCE_GROUP_NAME }}", "$TERRAFORM_STORAGE_NAME": "${{ env.TERRAFORM_STORAGE_NAME }}" , "$TERRAFORM_CONTAINER_NAME": "${{ env.TERRAFORM_CONTAINER_NAME }}" , "$TERRAFORM_KEY": "${{ env.TERRAFORM_KEY }}" }]'
     
     # Install the needed version of Terraform cli
