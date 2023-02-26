@@ -83,14 +83,9 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: eventFunction
-        path: ./output/**
-        if-no-files-found: error
-    
-    - name: Upload the terraform file
-      uses: actions/upload-artifact@v3
-      with:
-        name: eventFunction/Deploy
-        path: ./Deploy/**
+        path: |
+         ./output/**
+         ./Deploy/**
         if-no-files-found: error
       
     #- name: 'Resolve Project Dependencies Using Dotnet'
