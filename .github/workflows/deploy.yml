@@ -50,10 +50,7 @@ jobs:
       run: dotnet test --no-build --verbosity normal
       
     - name: Publish
-      run: ls
-      
-    - name: Publish
-      run: dotnet publish azureEventProcessing/EventProcessingFunction.csproj -c Release -o ./output
+      run: dotnet publish ./EventProcessingFunction.csproj -c Release -o ./output
       
     - name: Upload the build artifact
       uses: actions/upload-artifact@v3
